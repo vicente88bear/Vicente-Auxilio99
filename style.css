@@ -1,0 +1,207 @@
+:root {
+  --bg: #2c2c2c;
+  --panel: #3d3d3d;
+  --muted: #555;
+  --green: #00ff99;
+  --red: #ff3b3b;
+  --shadow: rgba(0,0,0,0.6);
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:var(--bg);
+  color:#fff;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+/* LOGIN */
+.login{
+  width:360px;
+  background:var(--panel);
+  padding:28px;
+  border-radius:14px;
+  box-shadow:0 10px 30px var(--shadow);
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:center;
+}
+.login h2{margin:0 0 6px;font-size:24px}
+
+/* Campo key verde */
+.key-input{
+  width:85%;
+  padding:12px 16px;
+  border-radius:12px;
+  border:2px solid #555;
+  background:#2b2b2b;
+  color:#fff;
+  font-size:16px;
+  transition:box-shadow .3s,border-color .3s,transform .2s;
+}
+.key-input:focus{
+  border-color:var(--green);
+  box-shadow:0 0 16px var(--green);
+  transform:translateY(-2px);
+}
+
+/* Botão login */
+.login-btn{
+  padding:12px 36px;
+  border-radius:10px;
+  border:none;
+  background:#555;
+  color:#fff;
+  font-size:16px;
+  cursor:pointer;
+  box-shadow:0 8px 0 rgba(0,0,0,0.35);
+  transition:background .2s,box-shadow .2s,transform .2s;
+}
+.login-btn:active{
+  transform:translateY(4px);
+  box-shadow:0 3px 0 rgba(0,0,0,0.35);
+}
+.login-btn.logged-in{
+  background:var(--green);
+  color:#000;
+  box-shadow:0 0 16px var(--green);
+  transform:translateY(-2px);
+}
+
+/* APP */
+.app{width:380px;}
+.tabs{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+  margin-bottom:14px;
+}
+.tab{
+  background:#555;
+  padding:12px 36px;
+  border-radius:10px;
+  border:0;
+  cursor:pointer;
+  color:#fff;
+  box-shadow:0 6px 0 rgba(0,0,0,0.35);
+  font-weight:600;
+  transition:background .3s,box-shadow .2s,transform .2s;
+}
+.tab.active{
+  background:var(--green);
+  color:#000;
+}
+.tab:active{
+  transform:translateY(4px);
+  box-shadow:0 3px 0 rgba(0,0,0,0.35);
+}
+
+/* PAINEL */
+.painel{
+  background:var(--panel);
+  padding:26px;
+  border-radius:14px;
+  box-shadow:0 12px 40px var(--shadow);
+}
+.titulo{text-align:center;font-size:32px;margin:0 0 12px;}
+.toggle-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:14px 0;
+  width:100%;
+}
+
+/* SWITCH */
+.switch{position:relative;width:52px;height:30px}
+.switch input{opacity:0;width:0;height:0}
+.slider-toggle{
+  position:absolute;inset:0;background:var(--muted);
+  border-radius:999px;transition:.25s;
+}
+.slider-toggle:before{
+  content:"";position:absolute;left:4px;top:4px;width:22px;height:22px;
+  background:#fff;border-radius:50%;transition:.25s;
+}
+.switch input:checked + .slider-toggle{
+  background:var(--green);box-shadow:0 0 14px var(--green);
+}
+.switch input:checked + .slider-toggle:before{
+  transform:translateX(22px);
+}
+.slider-toggle.red{background:var(--muted);}
+.switch input:checked + .slider-toggle.red{
+  background:var(--red);box-shadow:0 0 14px var(--red);
+}
+
+/* BARRAS */
+.barra-container{
+  position:relative;
+  background:#666;
+  border-radius:12px;
+  height:28px;
+  overflow:hidden;
+  margin-top:5px;
+}
+.barra{
+  height:100%;
+  width:50%;
+  background:var(--green);
+  border-radius:12px;
+  transition:width .18s ease;
+  box-shadow:0 0 16px var(--green);
+}
+.barra-suav{
+  height:100%;
+  width:50%;
+  background:var(--red);
+  border-radius:12px;
+  transition:width .18s ease;
+  box-shadow:0 0 16px var(--red);
+}
+input[type=range]{
+  position:absolute;inset:0;width:100%;height:100%;
+  background:transparent;
+  -webkit-appearance:none;
+  appearance:none;
+  z-index:2;
+  cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:2px;height:28px;background:transparent;border:0;
+}
+
+/* PORCENTAGENS */
+.percent, .percent-suav{
+  text-align:center;
+  font-weight:700;
+  font-size:16px;
+  margin:10px 0;
+}
+.percent{color:var(--green);text-shadow:0 0 10px var(--green);}
+.percent-suav{color:var(--red);text-shadow:0 0 10px var(--red);}
+
+/* INJETAR */
+.injetar-row{display:flex;justify-content:center;margin-top:18px;}
+.injetar-btn{
+  background:#555;
+  color:#fff;
+  padding:12px 28px;
+  border-radius:10px;
+  border:0;
+  cursor:pointer;
+  font-weight:700;
+  box-shadow:0 8px 0 rgba(0,0,0,0.35);
+  transition:background .2s,box-shadow .2s;
+}
+.injetar-btn:active{
+  transform:translateY(4px);
+  box-shadow:0 3px 0 rgba(0,0,0,0.35);
+}
