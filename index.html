@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+<title>Vicente Auxílio</title>
+
+<!-- Detecta se é desktop e bloqueia antes de carregar tudo -->
+<script>
+  (function(){
+    // Se detectar que NÃO é mobile, bloqueia o acesso
+    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    if (!isMobile) {
+      // marcaremos que foi bloqueado
+      window.ACCESS_BLOCKED = true;
+
+      // substitui o body por uma tela de bloqueio simples (para evitar que o restante carregue/funcione)
+      document.documentElement.innerHTML = '\
+        <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Bloqueado</title>\
+        <style>\
+          html,body{height:100%;margin:0;font-family:Arial,Helvetica,sans-serif;background:#111;color:#fff;}\
+          .blocker{height:100%;display:flex;align-items:center;justify-content:center;padding:30px;box-sizing:border-box;}\
+          .card{max-width:520px;background:#1f1f1f;border-radius:12px;padding:28px;text-align:center;box-shadow:0 10px 40px rgba(0,0,0,0.6);}\
+          .card h1{margin:0 0 12px 0;font-size:22px;color:#ffcc00;}\
+          .card p{color:#ddd;margin:10px 0 0 0;line-height:1.4}\
+          .small{margin-top:14px;color:#aaa;font-size:13px}\
+        </style></head>\
+        <body><div class="blocker"><div class="card"><h1>Acesso não permitido em Desktop</h1><p>Este painel foi projetado para uso exclusivo em celulares.<br>Abra o link a partir de um smartphone para acessar o painel corretamente.</p><p class="small">Se você for o criador e precisa testar no PC, use uma ferramenta de emulação mobile ou desative temporariamente essa proteção no arquivo HTML.</p></div></div></body>';
+      
+      // evita que scripts posteriores tentem executar
+      throw new Error('Access blocked for non-mobile devices.');
+    } else {
+      // não bloquear, garantir flag false
+      window.ACCESS_BLOCKED = false;
+    }
+  })();
+</script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login" class="login">
+  <h2>Login</h2>
+  <input id="keyInput" class="key-input" placeholder="Digite sua key" />
+  <button id="loginBtn" class="login-btn">Login</button>
+  <p id="loginMsg" class="login-msg"></p>
+</div>
+
+<!-- APLICATIVO -->
+<div id="app" class="app" style="display:none;">
+
+  <!-- TOPO COM BOTÕES -->
+  <div class="tabs">
+    <button id="tabNormal" class="tab active">FF Normal</button>
+    <button id="tabMax" class="tab">FF Max</button>
+  </div>
+
+  <!-- PAINEL -->
+  <div id="painel" class="painel">
+    <h1 class="titulo">Vicente Auxílio</h1>
+
+    <!-- 1 NoRecoil -->
+    <div class="toggle-row">
+      <span>NoRecoil</span>
+      <label class="switch">
+        <input type="checkbox" id="toggle-recoil">
+        <span class="slider-toggle"></span>
+      </label>
+    </div>
+
+    <!-- 2 Aumentar Precisão -->
+    <div class="toggle-row">
+      <span>Aumentar Precisão</span>
+      <label class="switch">
+        <input type="checkbox" id="toggle-precision">
+        <span class="slider-toggle"></span>
+      </label>
+    </div>
+
+    <!-- 3 Suavização (apenas no FF Max) -->
+    <div id="maxExtra" class="max-extra" style="display:none;">
+      <div class="toggle-row">
+        <span>Suavização</span>
+        <label class="switch">
+          <input type="checkbox" id="toggle-suav">
+          <span class="slider-toggle red"></span>
+        </label>
+      </div>
+      <p id="percent-suav" class="percent-suav">50%</p>
+      <div class="barra-container">
+        <div class="barra barra-suav" id="barra-suav"></div>
+        <input type="range" id="slider-suav" min="0" max="100" value="50">
+      </div>
+    </div>
+
+    <!-- Porcentagem principal -->
+    <p id="percent" class="percent">50%</p>
+
+    <!-- Barra principal -->
+    <div class="barra-container">
+      <div class="barra" id="barra"></div>
+      <input type="range" id="slider" min="0" max="100" value="50">
+    </div>
+
+    <!-- Botão INJETAR -->
+    <div class="injetar-row">
+      <button id="injetarNormal" class="injetar-btn">INJETAR</button>
+      <button id="injetarMax" class="injetar-btn" style="display:none;">INJETAR</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
